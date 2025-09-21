@@ -3,6 +3,7 @@ from ml.data import process_data
 from sklearn.linear_model import LogisticRegression
 import pickle
 
+
 def train_model(X_train, y_train):
     """
     Trains a machine learning model and returns it.
