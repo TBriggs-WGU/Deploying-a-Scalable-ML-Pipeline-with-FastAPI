@@ -19,7 +19,6 @@ CAT_FEATURES = [
 ]
 
 
-# Deterministic dataframe so tests run instantly and predictably
 def _toy_df():
     """Tiny, deterministic dataframe so tests run instantly and predictably."""
     return pd.DataFrame(
@@ -53,7 +52,6 @@ def _toy_df():
     )
 
 
-# TODO: implement the first test. Change the function name and input as needed
 def test_train_model_returns_expected_algorithm():
     """
     # Test 1: Verifies the training function returns the expected algorithm type
@@ -65,7 +63,6 @@ def test_train_model_returns_expected_algorithm():
     assert isinstance(model, LogisticRegression)
 
 
-# TODO: implement the second test. Change the function name and input as needed
 def test_inference_output_shape_and_binary():
     """
     # Test 2: verifies inference output shape and values
@@ -83,7 +80,6 @@ def test_inference_output_shape_and_binary():
     assert y2.shape == preds.shape
 
 
-# TODO: implement the third test. Change the function name and input as needed
 def test_compute_model_metrics_known_values():
     """
     # Test 3: Verifies metric computation on a known tiny example
