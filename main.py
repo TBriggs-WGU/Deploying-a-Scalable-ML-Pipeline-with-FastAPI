@@ -1,11 +1,10 @@
-import os
-
 import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
 from ml.data import apply_label, process_data
 from ml.model import inference, load_model
+
 
 # DO NOT MODIFY
 class Data(BaseModel):
@@ -26,19 +25,21 @@ class Data(BaseModel):
     hours_per_week: int = Field(..., example=40, alias="hours-per-week")
     native_country: str = Field(..., example="United-States", alias="native-country")
 
-ENCODER_PATH = "model/encoder.pkl" # TODO: enter the path for the saved encoder
+
+ENCODER_PATH = "model/encoder.pkl"  # TODO: enter the path for the saved encoder
 encoder = load_model(ENCODER_PATH)
 
-MODEL_PATH = "model/model.pkl" # TODO: enter the path for the saved model
+MODEL_PATH = "model/model.pkl"  # TODO: enter the path for the saved model
 model = load_model(MODEL_PATH)
 
 # TODO: create a RESTful API using FastAPI
 app = FastAPI(title="Census Income Classifier")
 
+
 # TODO: create a GET on the root giving a welcome message
 @app.get("/")
 async def get_root():
-    """ Say hello!"""
+    """Say hello!"""
     return {"message": "Hello from the API!"}
 
 
@@ -71,5 +72,7 @@ async def post_inference(data: Data):
         encoder=encoder,
         lb=None,
     )
-    _inference = inference(model, data_processed) # your code here to predict the result using data_processed
+    _inference = inference(
+        model, data_processed
+    )  # your code here to predict the result using data_processed
     return {"result": apply_label(_inference)}

@@ -1,9 +1,8 @@
 import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
-import numpy as np
-import pandas as pd
 from sklearn.linear_model import LogisticRegression
+
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -24,7 +23,6 @@ def train_model(X_train, y_train):
     model = LogisticRegression(solver="liblinear", max_iter=1000, random_state=42)
     model.fit(X_train, y_train)
     return model
-
 
 
 def compute_model_metrics(y, preds):
@@ -50,7 +48,7 @@ def compute_model_metrics(y, preds):
 
 
 def inference(model, X):
-    """ Run model inferences and return the predictions.
+    """Run model inferences and return the predictions.
 
     Inputs
     ------
@@ -67,7 +65,7 @@ def inference(model, X):
 
 
 def save_model(model, path):
-    """ Serializes model to a file.
+    """Serializes model to a file.
 
     Inputs
     ------
@@ -81,16 +79,15 @@ def save_model(model, path):
 
 
 def load_model(path):
-    """ Loads pickle file from `path` and returns it."""
+    """Loads pickle file from `path` and returns it."""
     with open(path, "rb") as f:
         return pickle.load(f)
-
 
 
 def performance_on_categorical_slice(
     data, column_name, slice_value, categorical_features, label, encoder, lb, model
 ):
-    """ Computes the model metrics on a slice of the data specified by a column name and
+    """Computes the model metrics on a slice of the data specified by a column name and
 
     Processes the data using one hot encoding for the categorical features and a
     label binarizer for the labels. This can be used in either training or
@@ -136,6 +133,8 @@ def performance_on_categorical_slice(
         encoder=encoder,
         lb=lb,
     )
-    preds = inference(model, X_slice) # your code here to get prediction on X_slice using the inference function
+    preds = inference(
+        model, X_slice
+    )  # your code here to get prediction on X_slice using the inference function
     precision, recall, fbeta = compute_model_metrics(y_slice, preds)
     return precision, recall, fbeta

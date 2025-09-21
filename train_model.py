@@ -12,11 +12,12 @@ from ml.model import (
     save_model,
     train_model,
 )
+
 # TODO: load the cencus.csv data
 project_path = os.getcwd()
 data_path = os.path.join(project_path, "data", "census.csv")
 print(data_path)
-data = pd.read_csv(data_path) # your code here
+data = pd.read_csv(data_path)  # your code here
 
 # TODO: split the provided data to have a train dataset and a test dataset
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
@@ -38,11 +39,8 @@ cat_features = [
 
 # TODO: use the process_data function provided to process the data.
 X_train, y_train, encoder, lb = process_data(
-    train,
-    categorical_features=cat_features,
-    label="salary",
-    training=True
-    )
+    train, categorical_features=cat_features, label="salary", training=True
+)
 
 X_test, y_test, _, _ = process_data(
     test,
@@ -63,9 +61,7 @@ encoder_path = os.path.join(project_path, "model", "encoder.pkl")
 save_model(encoder, encoder_path)
 
 # load the model
-model = load_model(
-    model_path
-) 
+model = load_model(model_path)
 
 # TODO: use the inference function to run the model inferences on the test dataset.
 preds = inference(model, X_test)
